@@ -2,6 +2,8 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 const mysql = require('mysql');
 
+let connection;
+
 const app = express();
 
 const PORT = process.env.PORT || 8080;
@@ -12,12 +14,14 @@ app.use(express.json());
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
-const connection = mysql.createConnection({
-    host: "dno6xji1n8fm828n.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+if(process.env.JAWSDB_URL) {
+    connection = mysql.createConnection(process.env.JAWSDB_URL)
+} else connection = mysql.createConnection({
+    host: "localhost",
     port: 3306,
-    user: "acvebp7c1fkaw4qc",
-    password: "y5ts6n2o7z3tisal",
-    database: "xov0jp773idxt8vc"
+    user: "root",
+    password: "rootroot",
+    database: "burgify_me"
 });
 
 connection.connect(function(err) {
