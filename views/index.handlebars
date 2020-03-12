@@ -1,6 +1,9 @@
-<img src="https://imgs.xkcd.com/comics/sandwich.png" alt="xkcd #149">
-<h1>Burgify me!</h1>
-
+<div class="columns is-centered">
+  <div class="colum">
+    <img src="https://imgs.xkcd.com/comics/sandwich.png" alt="xkcd #149">
+    <h1 class="title text-is-centered">Burgify me!</h1>
+  </div>
+</div>
 <div class="columns">
   <div class="column">
       {{#each food}}
@@ -25,7 +28,7 @@
 
 <div class="field has-addons">
   <div class="control">
-    <input class="input" id="burgername" type="text" placeholder="sudo make me a sandwich">
+    <textarea class="textarea" id="burgername" type="text" placeholder="sudo make me a sandwich" rows="2"></textarea>
   </div>
   <div class="control">
     <a class="button is-info" id="postButton">
@@ -35,6 +38,7 @@
 </div>
 
 <script>
+
   $('#postButton').click(function(event){
     event.preventDefault()
     $.post('/api', {sandwich: $('#burgername').val().trim()})
@@ -43,7 +47,8 @@
         location.reload();
       }
     })
-  })
+  });
+
   $('.eatButton').click(function(){
     const id = $(this).attr('data-id');
     $.ajax({
@@ -54,5 +59,6 @@
         location.reload();
       }
     })
-  })
+  });
+
 </script>
