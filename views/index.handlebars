@@ -1,0 +1,58 @@
+<img src="https://imgs.xkcd.com/comics/sandwich.png" alt="xkcd #149">
+<h1>Burgify me!</h1>
+
+<div class="columns">
+  <div class="column">
+      {{#each food}}
+        {{#unless devoured}}
+        <div class="has-background-info">
+          <p>{{id}}: {{sandwich}}</p>
+          <button class="eatButton" data-id="{{id}}">eat me!</button>
+        </div>
+        {{/unless}}
+      {{/each}}
+  </div>
+  <div class="column">
+      {{#each food}}
+        {{#if devoured}}
+        <div class="has-background-warning">
+          <p>{{id}}: {{sandwich}}</p>
+        </div>
+        {{/if}}
+      {{/each}}
+  </div>
+</div>
+
+<div class="field has-addons">
+  <div class="control">
+    <input class="input" id="burgername" type="text" placeholder="sudo make me a sandwich">
+  </div>
+  <div class="control">
+    <a class="button is-info" id="postButton">
+      submit
+    </a>
+  </div>
+</div>
+
+<script>
+  $('#postButton').click(function(event){
+    event.preventDefault()
+    $.post('/api', {sandwich: $('#burgername').val().trim()})
+    .then(result => {
+      if(result === "OK"){
+        location.reload();
+      }
+    })
+  })
+  $('.eatButton').click(function(){
+    const id = $(this).attr('data-id');
+    $.ajax({
+      url: '/api/' + id,
+      method: 'PUT'
+    }).then(result => {
+      if(result === "OK"){
+        location.reload();
+      }
+    })
+  })
+</script>
