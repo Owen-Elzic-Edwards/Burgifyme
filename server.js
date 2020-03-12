@@ -13,11 +13,11 @@ app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
 const connection = mysql.createConnection({
-    host: "localhost",
+    host: "dno6xji1n8fm828n.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
     port: 3306,
-    user: "root",
-    password: "rootroot",
-    database: "burgify_me"
+    user: "acvebp7c1fkaw4qc",
+    password: "y5ts6n2o7z3tisal",
+    database: "xov0jp773idxt8vc"
 });
 
 connection.connect(function(err) {
